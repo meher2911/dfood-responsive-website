@@ -1,0 +1,933 @@
+/*
+
+COLORS:
+primary: #e67e22  #ff8080
+tints:#fdf2e9  #fff5f5 
+shades: #ff6666 #ff4d4d
+accents:
+greys: #555,#333
+
+ line height:
+ 1.03
+ paragraph default:1.5
+
+ font weight:
+ 400
+ 500
+ 600
+ 700
+*/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  overflow-x: hidden;
+
+  /* does not work in safari */
+  /* scroll-behavior: smooth; */
+}
+
+body {
+  font-family: "Rubik", sans-serif;
+  line-height: 1;
+  font-weight: 400;
+  color: #555;
+
+  /* all the elements overflowing the viewport will be hidden 
+  (did for the navigation)*/
+  /* only works if there is nothing positioned
+   absolutely in relation to the body */
+  overflow-x: hidden;
+}
+
+/* ------------------- */
+/* general reusable */
+/* ------------------- */
+
+.heading-primary,
+.heading-secondary,
+.heading-tertiary {
+  font-weight: 600;
+  color: #333;
+  letter-spacing: -0.4px;
+}
+
+.heading-primary {
+  font-size: 5.2rem;
+  line-height: 1.03;
+  margin-bottom: 3rem;
+}
+
+.heading-secondary {
+  font-size: 4rem;
+  margin-bottom: 8rem;
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+  line-height: 1.1;
+  margin-bottom: 2.8rem;
+}
+
+.subheading {
+  /* because we used span and span is an inline element so we need to
+   make it block before applying anything */
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #ff4d4d;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.75px;
+}
+
+/*.btn,    this btn is for the signupnow which is only button and not a link*/
+.btn:link,
+.btn:visited {
+  display: inline-block;
+  font-size: 1.9rem;
+  color: #fff;
+  padding: 1.4rem 2.2rem;
+  border-radius: 14px;
+  text-decoration: none;
+  /* always put transition in the original state */
+  transition: all 0.3s;
+}
+
+.btn-imp:link,
+.btn-imp:visited {
+  background-color: #ff8080;
+}
+
+.btn-imp:hover,
+.btn-imp:active {
+  background-color: #ff6666;
+}
+
+.btn-notimp:link,
+.btn-notimp:visited {
+  background-color: #fff;
+  color: #555;
+}
+
+.btn-notimp:hover,
+.btn-notimp:active {
+  background-color: #fff5f5;
+  /* if border: property used then border will be added outside and disturbs the other layout */
+  /* hence we are using box-shadow to add border inside */
+  box-shadow: inset 0 0 0 2.5px #fff;
+}
+
+.link:link,
+.link:visited {
+  display: inline-block;
+  color: #ff8080;
+  text-decoration: none;
+  border-bottom: 1.5px solid currentColor;
+  padding-bottom: 2px;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:active {
+  color: #ff4d4d;
+  border-bottom: 1.5px solid transparent;
+}
+
+/* *:focus{
+  outline: none;
+  /* outline: 4px dashed #ff8080;
+  outline-offset: 4px; 
+
+  box-shadow: 0 0 0 4px rgba(255, 128, 128, 0.514);
+} */
+
+.container {
+  max-width: 120rem; /* kind of standard (1140px overallwith padding) */
+  padding: 0 3.2rem;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  row-gap: 9.6rem;
+  column-gap: 6.4rem;
+}
+
+/* HELPER/SETTING CLASSES */
+.margin-bottom-md {
+  margin-bottom: 4.8rem;
+}
+
+.for-margin {
+  margin-right: 1.5rem !important;
+  /* important is used when we want to give it the highest priority i.e fixed throughout */
+}
+
+.center-text {
+  text-align: center;
+}
+
+/* we made this becuause we might not want this setting in 
+every grid layout so making another general class for 
+vertically allignment of items for 'step-container' */
+.grid-center-v {
+  align-items: center;
+}
+.grid-2-cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-3-cols {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-4-cols {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-5-cols {
+  grid-template-columns: repeat(5, 1fr);
+}
+/* ------------------- */
+/* header */
+/* ------------------- */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff5f5;
+
+  /* because we want header to be sticky later */
+  height: 6rem;
+  padding: 0 4.8rem;
+
+  position: relative;
+}
+
+.logo {
+  height: 6.4rem;
+}
+
+/* ------------------- */
+/* navigation */
+/* ------------------- */
+
+.main-nav-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 4.4rem;
+}
+
+.main-nav-link:link,
+.main-nav-link:visited {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 500;
+  color: #333;
+  font-size: 1.8rem;
+  transition: all 0.3s;
+}
+
+.main-nav-link:hover,
+.main-nav-link:active {
+  color: #ff4d4d;
+}
+
+/* here we wrote .main-nav-link before .nav-cta coz it will increase the specificity
+ and so these properties will always apply */
+.main-nav-link.nav-cta:link,
+.main-nav-link.nav-cta:visited {
+  padding: 1.2rem 2rem;
+  border-radius: 14px;
+  color: #fff;
+  background-color: #ff8080;
+}
+
+.main-nav-link.nav-cta:hover,
+.main-nav-link.nav-cta:active {
+  background-color: #ff6666;
+}
+
+/* MOBILE NAVIGATION */
+.btn-mobile-nav{
+  border: none;
+  background: none ;
+  cursor:pointer;
+  display: none;
+}
+
+.icon-mobile-nav{
+  font-size: 4.8rem;
+  color:#333;
+}
+
+.icon-mobile-nav[name="close-outline"]{
+  display: none;
+}
+
+
+/* STICKY NAVIGATION */
+.sticky .header{
+  position: fixed;
+  top:0;
+  bottom: 0;
+  width: 100%;
+  height: 7rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  z-index: 9999;
+  background-color: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.03);
+}
+
+.sticky .section-hero{
+  margin-top: 6rem;
+}
+
+/* ------------------- */
+/* hero section */
+/* ------------------- */
+.section-hero {
+  background-color: #fff5f5;
+  padding: 6rem 0 9rem 0;
+}
+
+.hero {
+  max-width: 130rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9.6rem;
+  margin: 0 auto;
+  padding: 0 2.4rem;
+  align-items: center;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+.hero-summery {
+  font-size: 2rem;
+  line-height: 1.6;
+  margin-bottom: 5.2rem;
+}
+
+.delivered-meals {
+  display: flex;
+  margin-top: 6.8rem;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.delivered-imgs {
+  display: flex;
+}
+
+.delivered-imgs img {
+  height: 4.5rem;
+  border-radius: 55%;
+  margin-right: -1.6rem;
+  border: 2px solid #fff5f5;
+}
+
+.delivered-imgs img:last-child {
+  margin: 0;
+}
+
+.delivered-text {
+  font-size: 1.8rem;
+  font-weight: 500;
+}
+
+.delivered-text span {
+  font-weight: 700;
+  color: #ff4d4d;
+}
+
+
+/* ------------------- */
+/* how section */
+/* ------------------- */
+
+.section-how {
+  padding: 9.6rem 0;
+}
+
+.step-number {
+  font-size: 9.4rem;
+  font-weight: 600;
+  color: #ddd;
+  margin-bottom: 1.2rem;
+}
+
+.step-img {
+  width: 35%;
+}
+
+.step-description {
+  font-size: 1.8rem;
+  line-height: 1.7;
+}
+
+.step-img-box {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* psuedo element because we not want to add anything in the html code just for visuals */
+/* so adding child element to parent which we want to style  */
+/* but child cannot be added to images so we are adding it to its 
+parent that is 'step text box' */
+
+.step-img-box::before,
+.step-img-box::after {
+  position: absolute;
+  content: "";
+  display: block;
+  border-radius: 50%;
+
+  /* it worked without these 3 below also but idk why this is important */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.step-img-box::before {
+  width: 60%;
+  /* height also 60% because we want square to become circle */
+  /* but height:60% wont work so here's another trick */
+  /* 60% of parent's width */
+  padding-bottom: 60%;
+  background-color: #fff5f5;
+  /* we want to put this circle behind img so reducing the priority by setting a negative value */
+  z-index: -2;
+}
+
+.step-img-box::after {
+  width: 47%;
+  padding-bottom: 47%;
+  background-color: #ffe6e6;
+  z-index: -1;
+}
+
+/* ------------------- */
+/* meals section */
+/* ------------------- */
+
+.section-meals {
+  padding: 8.4rem 0;
+}
+
+.meals {
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.09);
+  border-radius: 1.2rem;
+  overflow: hidden;
+}
+
+.meals:hover {
+  transform: translateY(-1.2rem);
+  transition: all 0.4s;
+  box-shadow: 0 3.6rem 6.4rem rgba(0, 0, 0, 0.09);
+}
+.meal-img {
+  width: 100%;
+}
+
+.meal-tags {
+  margin-bottom: 1rem;
+  display: flex;
+  gap: 5px;
+}
+.tag {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.2rem;
+  color: #333;
+  text-transform: uppercase;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.tag--vegetarian {
+  background-color: #51cf66;
+}
+
+.tag--vegan {
+  background-color: #94d82d;
+}
+
+.tag--paleo {
+  background-color: #ffd34b;
+}
+
+.meal-title {
+  font-size: 2.4rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 3rem;
+}
+
+.meal-attributes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.meal-attribute {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.meal-icon {
+  color: #ff8080;
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+strong {
+  font-weight: 500;
+}
+
+.meal-txt {
+  padding: 3.2rem 3.6rem 4.8rem 3.6rem;
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+}
+
+.list-icon {
+  width: 3rem;
+  height: 3rem;
+  color: #ff8080;
+}
+
+.list-el {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  line-height: 1.2;
+}
+
+.all-recipies {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+/* ------------------- */
+/* testimonial section */
+/* ------------------- */
+
+.section-testimonials {
+  background-color: #fff5f5;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  align-items: center;
+}
+
+.testimonial-container{
+  padding: 8.4rem;
+}
+
+.t-sub{
+  margin-bottom: 3.6rem;
+}
+
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6.4rem;
+}
+
+.testimonial {
+  background-color: #ffe6e6;
+  border-radius: 10px;
+  padding: 1.6rem;
+}
+
+.testimonial-img {
+  width: 6.4rem;
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+}
+
+.testimonial-text {
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-bottom: 1.6rem;
+}
+
+.testimonial-name {
+  font-size: 1.6rem;
+  color: #777;
+}
+
+.gallery-item img{
+  display: block;
+  width:100%
+}
+
+.gallery{
+  display: grid;
+  grid-template-columns: repeat(3,1fr) ;
+  gap:1.2rem;
+  padding: 1.2rem;
+}
+
+.gallery-item{
+  overflow: hidden;
+}
+
+.gallery-item img:hover{
+  transform: scale(1.1);
+  transition: all 0.4s;
+}
+
+/* ------------------- */
+/* pricing section */
+/* ------------------- */
+
+.section-pricing{
+  padding: 8.4rem 0;
+}
+
+.pricing-plan{
+  background-color: #fff5f5;
+  padding: 3.6rem;
+  border-radius: 1.6rem;
+  width:65%;
+}
+.pricing-plan--starter{
+  justify-self: end;
+  border : 3px solid #fff5f5;
+  background-color: #fff;
+  padding :4.5rem;
+}
+
+.pricing-plan--complete{
+  padding :4.8rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-plan--complete::after{
+  position: absolute;
+  content: "BEST VALUE";
+  background-color: #ff4040;
+  color: #fff;
+  top: 4%;
+  right:-14%;
+  padding:0.8rem 4.8rem;
+  font-weight: 600;
+  letter-spacing: 0.75px;
+  transform: rotate(45deg);
+}
+
+.header-price{
+  text-align: center;
+  margin-bottom: 3.6rem;
+}
+
+.plan-name{
+  color: #ff8080;
+  font-size: 1.8rem; 
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2.4rem;
+}
+.plan-price{
+  font-size: 5.4rem;
+  color:#333;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.plan-price span{
+  font-size: 3rem;
+  font-weight: 500;
+  margin-right: 0.8rem;
+}
+.plan-text{
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color:#6f6f6f;
+}
+
+.plan-signup{
+  text-align: center;
+  margin-top: 3.6rem;
+}
+
+/* for having margin bottom in the pricing grid (above feature) */
+.grid:not(:last-child){
+  margin-bottom: 8.4rem;
+}
+
+.plan-details{
+  font-size: 1.6rem;
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 9.6rem;
+  margin-top: -3.2rem;
+}
+
+
+.feature{
+  text-align: center;
+}
+
+.feature-icon{
+  color:#ff8080;
+  font-size: 2.8rem;
+  margin-bottom: 2.8rem;
+  background-color: #fff5f5;
+  padding: 1.4rem;
+  border-radius: 50px;
+}
+
+.feature-title{
+  font-size: 2.4rem;
+  font-weight: 600;
+  color:#333;
+  margin-bottom: 1.4rem;
+}
+
+.feature-text{
+  font-size: 1.8rem;
+  line-height: 1.6;
+}
+
+
+
+/* ------------------- */
+/* cta section */
+/* ------------------- */
+
+.section-cta{
+  padding: 4.8rem 0;
+}
+
+.cta{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+  border-radius: 1.2rem;
+  background-image: linear-gradient(to bottom , #ffb3b3 ,#ff8080 );
+  overflow: hidden;
+}
+
+.cta-image{
+  background-image: linear-gradient(to bottom ,
+   rgba(255, 179, 179, 0.27) ,rgba(255, 128, 128, 0.27) ),
+  url("../img/eating.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.cta-text-box{
+  color: #331a1a;
+  padding:5rem;
+}
+
+.cta .heading-secondary{
+  color:#331a1a;
+  margin-bottom: 3.2rem;
+}
+
+.cta-text{
+  font-size: 1.8rem;
+  line-height: 1.6;
+  margin-bottom: 4.8rem;
+}
+
+.cta-form{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  row-gap: 2.8rem;
+  column-gap: 3.2rem;
+}
+
+.cta-form label{
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color:#331a1a;
+  margin-bottom: 1.2rem;
+}
+
+.cta-form input,
+.cta-form select{
+  width: 100%;
+  padding:1rem;
+  font-family: inherit;
+  font-size: 1.6rem;
+  border: none;
+  background-color: #fff5f5;
+  color:inherit;
+  border-radius: 0.9rem;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.15);
+}
+
+.cta-form input::placeholder{
+  color:#999;
+}
+
+.cta-form button{
+  background-color: #331a1a;
+  color: #fff5f5;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  align-self:end;
+  padding: 1.1rem;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.cta-form button:hover{
+  background-color: #fff5f5;
+  color:#555;
+}
+
+.cta *:focus{
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 245, 245, 0.518);
+}
+
+/* ------------------- */
+/*featured section */
+/* ------------------- */
+
+.featured-in {
+  padding: 8.4rem 0 12.8rem 0;
+}
+
+.featured-heading {
+  font-size: 1.6rem;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2.8rem;
+  color: #939292;
+}
+
+.logos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.logos img {
+  height: 3.2rem;
+  filter: brightness(0);
+  opacity: 50%;
+}
+
+/* ------------------- */
+/*footer*/
+/* ------------------- */
+
+.footer {
+  padding: 8.4rem 0  ;
+  background-image: linear-gradient(to bottom , #fcfcfc ,#fff);
+}
+
+/* to not make first two columns look dense we will
+not keep equal size columns */
+.grid-footer{
+  grid-template-columns: 1.5fr 1.5fr 1fr 1fr 1fr;
+}
+
+.logo-col{
+  display: grid;
+  grid-template-columns: 1fr;
+
+  /* another way of getting copyright at the 
+  end of the box is by giving display:flex to logo-col
+  and giving margin-bottom:auto to copyright element */
+}
+
+.footer-logo{
+  text-decoration: none;
+  margin-bottom: 1.2rem;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color:#444;
+}
+
+.F{
+  color:#ff8080;
+}
+
+.social-links ion-icon{
+  font-size: 2.4rem;
+}
+
+.footer-heading{
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 3.2rem;
+}
+
+.social-links{
+  list-style: none;
+  display: flex;
+  gap:2.4rem;
+}
+
+.copyright{
+  font-size: 1.4rem;
+  color:#777;
+  line-height: 1.4;
+  align-self: center;
+}
+
+.contacts{
+  font-style: normal;
+  font-size: 1.6rem;
+  line-height: 1.4;
+}
+
+.address{
+  margin-bottom: 2.4rem;
+}
+.footer-nav{
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.footer-link:link,
+.footer-link:visited{
+  text-decoration: none;
+  font-size: 1.6rem;
+  color:#777;
+  transition: all 0.3s;
+}
+
+.footer-link:hover,
+.footer-link:active{
+  color:#555;
+
+}
