@@ -3,3 +3,4 @@ this repository contains a responsive website developed majorly with HTML and CS
 This project is done as a part of Udemy course by Jonas Schmedtmann
 (project description:Dfood is an AI-powered 365-days-per-year food subscription that will make you eat healthy again. 
 Tailored to your personal tastes and nutritional needs.)
+project deployed to netlify(where netlify form works) :- https://dfood-m.netlify.app
